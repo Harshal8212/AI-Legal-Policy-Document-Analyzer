@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+langchain
+langchain-huggingface
+sentence-transformers
+huggingface-hub
+langchain-chroma
+langchain-text-splitters
+langgraph
+chromadb
+pydantic
+python-dotenv
+tiktoken
+python-multipart
+pypdf
+python-docx
