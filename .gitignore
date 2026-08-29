@@ -131,3 +131,13 @@ dmypy.json
 # Project specific
 chroma_db/
 *.log
+
+# Hugging Face / sentence-transformers model caches
+.cache/huggingface/
+huggingface/
+models/
+sentence-transformers/
+*.bin
+*.safetensors
+*.onnx
+*.h5

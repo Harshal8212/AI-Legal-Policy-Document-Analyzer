@@ -1,20 +1,21 @@
-/* AI Legal Document Analyzer — Frontend */
-
 const UI = {
-    uploadArea:     document.getElementById('uploadArea'),
-    fileInput:      document.getElementById('fileInput'),
-    ingestBtn:      document.getElementById('ingestBtn'),
-    uploadStatus:   document.getElementById('uploadStatus'),
-    queryInput:     document.getElementById('queryInput'),
-    analyzeBtn:     document.getElementById('analyzeBtn'),
-    resultsSection: document.getElementById('resultsSection'),
-    riskSummary:    document.getElementById('riskSummary'),
-    resultsContent: document.getElementById('resultsContent'),
-    loadingOverlay: document.getElementById('loadingOverlay'),
-    loadingText:    document.getElementById('loadingText'),
+    uploadArea:        document.getElementById('uploadArea'),
+    fileInput:         document.getElementById('fileInput'),
+    ingestBtn:         document.getElementById('ingestBtn'),
+    uploadStatus:      document.getElementById('uploadStatus'),
+    queryInput:        document.getElementById('queryInput'),
+    analyzeBtn:        document.getElementById('analyzeBtn'),
+    resultsSection:    document.getElementById('resultsSection'),
+    printReportBtn:    document.getElementById('printReportBtn'),
+    printDocumentMeta: document.getElementById('printDocumentMeta'),
+    riskSummary:       document.getElementById('riskSummary'),
+    resultsContent:    document.getElementById('resultsContent'),
+    loadingOverlay:    document.getElementById('loadingOverlay'),
+    loadingText:       document.getElementById('loadingText'),
 };
 
 let selectedFile = null;
+let lastAnalyzedDoc = '';
 
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
@@ -40,6 +41,9 @@ function setupEventListeners() {
     // Buttons
     UI.ingestBtn.addEventListener('click', handleIngestion);
     UI.analyzeBtn.addEventListener('click', handleAnalysis);
+    if (UI.printReportBtn) {
+        UI.printReportBtn.addEventListener('click', () => window.print());
+    }
 
     // Quick query chips
     document.querySelectorAll('.btn-quick-query').forEach(btn => {
@@ -82,6 +86,7 @@ async function handleIngestion() {
         const data = await safeJson(response);
 
         if (response.ok && data.status === 'success') {
+            lastAnalyzedDoc = data.filename || (selectedFile ? selectedFile.name : 'Legal Document');
             showStatus(UI.uploadStatus, 'success',
                 `✅ Done! Processed ${data.num_clauses} clauses from "${data.filename}". Ready to analyze.`);
         } else {
@@ -114,7 +119,7 @@ async function handleAnalysis() {
         const data = await safeJson(response);
 
         if (response.ok) {
-            renderResults(data);
+            renderResults(data, query);
         } else {
             UI.resultsContent.textContent = data.detail || data.error || 'Analysis failed.';
             UI.resultsSection.style.display = 'block';
@@ -128,7 +133,21 @@ async function handleAnalysis() {
     }
 }
 
-function renderResults(data) {
+function renderResults(data, query = '') {
+    // Print document metadata
+    if (UI.printDocumentMeta) {
+        const dateStr = new Date().toLocaleString();
+        const docName = lastAnalyzedDoc || (selectedFile ? selectedFile.name : 'Uploaded Contract');
+        UI.printDocumentMeta.innerHTML = `
+            <div class="print-meta-grid">
+                <div><strong>Document:</strong> ${docName}</div>
+                <div><strong>Generated:</strong> ${dateStr}</div>
+                ${query ? `<div class="print-meta-query"><strong>Query:</strong> ${query}</div>` : ''}
+            </div>
+        `;
+        UI.printDocumentMeta.style.display = 'block';
+    }
+
     // Risk summary badges
     const report = data.overall_report || {};
     if (report.overall_risk_score !== undefined) {

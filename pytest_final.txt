@@ -1,0 +1,60 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.14, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\apex\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+hypothesis profile 'brownie-base' -> deadline=None, max_examples=50, stateful_step_count=10, report_multiple_bugs=False, database=DirectoryBasedExampleDatabase(WindowsPath('C:/Users/apex/.brownie/hypothesis'))
+rootdir: C:\Users\apex\Desktop\Project\AI-Legal-Policy-and-Document-Analyzer
+configfile: pyproject.toml
+plugins: anyio-4.12.1, eth-brownie-1.21.0, hypothesis-6.27.3, langsmith-0.8.9, asyncio-1.4.0, forked-1.6.0, xdist-1.34.0, web3-6.11.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 34 items
+
+tests/test_api_endpoints.py::TestHealthEndpoint::test_health_returns_ok PASSED [  2%]
+tests/test_api_endpoints.py::TestHomeEndpoint::test_serve_home_returns_html PASSED [  5%]
+tests/test_api_endpoints.py::TestIngestEndpoint::test_ingest_txt_file PASSED [  8%]
+tests/test_api_endpoints.py::TestIngestEndpoint::test_ingest_unsupported_format PASSED [ 11%]
+tests/test_api_endpoints.py::TestIngestEndpoint::test_ingest_missing_file PASSED [ 14%]
+tests/test_api_endpoints.py::TestAnalyzeEndpoint::test_analyze_returns_answer PASSED [ 17%]
+tests/test_api_endpoints.py::TestAnalyzeEndpoint::test_analyze_missing_query PASSED [ 20%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_unlimited_indemnity_rule PASSED [ 23%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_liability_cap_rule PASSED [ 26%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_termination_for_convenience PASSED [ 29%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_auto_renewal_rule PASSED [ 32%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_governing_law_rule PASSED [ 35%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_no_rules_triggered PASSED [ 38%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_multiple_rules_triggered PASSED [ 41%]
+tests/test_risk_engine.py::TestRiskRuleEngine::test_case_insensitive_matching PASSED [ 44%]
+tests/test_risk_engine.py::TestRiskClauseModel::test_valid_risk_clause PASSED [ 47%]
+tests/test_risk_engine.py::TestRiskClauseModel::test_risk_score_out_of_range PASSED [ 50%]
+tests/test_risk_engine.py::TestRiskClauseModel::test_risk_score_zero_invalid PASSED [ 52%]
+tests/test_risk_engine.py::TestRiskClauseModel::test_missing_required_field PASSED [ 55%]
+tests/test_risk_engine.py::TestRiskClauseModel::test_risk_report_model PASSED [ 58%]
+tests/test_splitter.py::TestSplitNumberedClauses::test_split_numbered_clauses PASSED [ 61%]
+tests/test_splitter.py::TestSplitNumberedClauses::test_split_deeply_nested_numbers PASSED [ 64%]
+tests/test_splitter.py::TestSplitArticles::test_split_articles PASSED    [ 67%]
+tests/test_splitter.py::TestSplitArticles::test_split_roman_numeral_articles PASSED [ 70%]
+tests/test_splitter.py::TestEdgeCases::test_intro_fallback PASSED        [ 73%]
+tests/test_splitter.py::TestEdgeCases::test_empty_text PASSED            [ 76%]
+tests/test_splitter.py::TestEdgeCases::test_whitespace_only_text PASSED  [ 79%]
+tests/test_splitter.py::TestMetadata::test_metadata_preserved PASSED     [ 82%]
+tests/test_splitter.py::TestMetadata::test_multiple_texts_with_metadata PASSED [ 85%]
+tests/test_workflow_graph.py::TestGraphState::test_graph_state_has_required_keys PASSED [ 88%]
+tests/test_workflow_graph.py::TestGraphState::test_graph_state_is_instantiable PASSED [ 91%]
+tests/test_workflow_graph.py::TestWorkflowGraph::test_workflow_compiles PASSED [ 94%]
+tests/test_workflow_graph.py::TestWorkflowGraph::test_workflow_has_expected_nodes PASSED [ 97%]
+tests/test_workflow_graph.py::TestWorkflowGraph::test_workflow_entry_point PASSED [100%]
+
+============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 34 passed, 2 warnings in 0.25s ========================
+
+INFO: Could not find files for the given pattern(s).
+C:\Users\apex\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\site-packages\web3\__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+
+RETURN CODE: 0

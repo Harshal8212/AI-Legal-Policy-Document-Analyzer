@@ -323,6 +323,59 @@ body {
     color: var(--text-secondary);
 }
 
+.results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.results-header .section-title {
+    margin-bottom: 0;
+}
+
+.btn-print {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-print:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-light);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.print-doc-meta {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+
+.print-meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+}
+
+.print-meta-query {
+    width: 100%;
+    color: var(--primary-light);
+}
+
 /* Footer */
 .footer {
     text-align: center;
@@ -372,4 +425,131 @@ body {
     .container { padding: 1rem; }
     .header h1 { font-size: 1.8rem; }
     .query-input-group { flex-direction: column; }
+    .results-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+
+/* Print Stylesheet */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #111827 !important;
+        font-size: 11pt;
+        line-height: 1.5;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .header {
+        margin-bottom: 1.5rem !important;
+        padding: 0 !important;
+        text-align: left !important;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 1rem !important;
+    }
+
+    .header h1 {
+        font-size: 1.8rem !important;
+        color: #111827 !important;
+        -webkit-text-fill-color: #111827 !important;
+        background: none !important;
+    }
+
+    .subtitle {
+        color: #4b5563 !important;
+        font-size: 0.95rem !important;
+    }
+
+    /* Hide interactive UI elements */
+    .upload-section,
+    .query-section,
+    .footer,
+    .btn-print,
+    .loading-overlay,
+    .logo-icon,
+    .section-icon {
+        display: none !important;
+    }
+
+    .card {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .section-title {
+        font-size: 1.3rem !important;
+        color: #111827 !important;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem !important;
+    }
+
+    .print-doc-meta {
+        background: #f3f4f6 !important;
+        color: #1f2937 !important;
+        border: 1px solid #d1d5db !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 6px !important;
+    }
+
+    .print-meta-query {
+        color: #1f2937 !important;
+    }
+
+    .risk-summary {
+        margin-bottom: 1rem !important;
+        gap: 0.5rem !important;
+    }
+
+    .risk-badge {
+        font-size: 9pt !important;
+        padding: 0.25rem 0.6rem !important;
+        border-radius: 4px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .risk-high {
+        background: #fee2e2 !important;
+        color: #991b1b !important;
+        border: 1px solid #f87171 !important;
+    }
+
+    .risk-medium {
+        background: #fef3c7 !important;
+        color: #92400e !important;
+        border: 1px solid #fbbf24 !important;
+    }
+
+    .risk-low {
+        background: #d1fae5 !important;
+        color: #065f46 !important;
+        border: 1px solid #34d399 !important;
+    }
+
+    .risk-score-badge {
+        background: #e0e7ff !important;
+        color: #3730a3 !important;
+        border: 1px solid #818cf8 !important;
+    }
+
+    .results-content {
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        color: #1f2937 !important;
+        font-size: 10.5pt !important;
+        line-height: 1.6 !important;
+        padding: 1.25rem !important;
+        page-break-inside: avoid;
+    }
+
+    .results-content strong {
+        color: #111827 !important;
+    }
 }

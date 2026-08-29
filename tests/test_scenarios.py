@@ -9,10 +9,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.ai_legal_analyzer.ingestion.ingestion_loader import DocumentLoader
-from src.ai_legal_analyzer.ingestion.legal_splitter import LegalClauseSplitter
-from src.ai_legal_analyzer.retrieval.vector_storage import VectorStoreManager
-from src.ai_legal_analyzer.workflows.workflow_graph import create_workflow
+from src.ingestion.ingestion_loader import DocumentLoader
+from src.ingestion.legal_splitter import LegalClauseSplitter
+from src.retrieval.vector_storage import VectorStoreManager
+from src.workflows.workflow_graph import create_workflow
 
 SAMPLES_DIR = Path(__file__).parent.parent / "samples"
 

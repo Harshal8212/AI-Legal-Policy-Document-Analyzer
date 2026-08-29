@@ -1,3 +1,4 @@
+# ── Runtime ──
 fastapi
 uvicorn[standard]
 langchain
@@ -14,3 +15,8 @@ tiktoken
 python-multipart
 pypdf
 python-docx
+
+# ── Testing / Dev ──
+pytest
+pytest-asyncio
+httpx
