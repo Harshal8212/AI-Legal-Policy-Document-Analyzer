@@ -32,5 +32,5 @@ jobs:
             echo "Go to: Settings → Secrets and variables → Actions → New repository secret"
             exit 0
           fi
-          git remote add hf https://ykjaat6104:$HF_TOKEN@huggingface.co/spaces/ykjaat6104/AI-Legal-Policy-and-Document-Analyzer
+          git remote add hf https://Harshal8212:$HF_TOKEN@huggingface.co/spaces/Harshal8212/AI-Legal-Policy-and-Document-Analyzer
           git push --force hf HEAD:refs/heads/main
