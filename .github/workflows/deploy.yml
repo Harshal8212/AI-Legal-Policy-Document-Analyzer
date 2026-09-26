@@ -2,20 +2,35 @@ name: Sync to Hugging Face Hub
 
 on:
   push:
-    branches: [main, master] # Adjust based on your default branch name
+    branches: [main, master]
+
+  # Allow manual trigger for re-runs
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
 
+      - name: Configure Git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
       - name: Push to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::warning::HF_TOKEN secret is not set. Skipping Hugging Face deployment."
+            echo "To fix this, add your Hugging Face token as a repository secret named HF_TOKEN."
+            echo "Go to: Settings → Secrets and variables → Actions → New repository secret"
+            exit 0
+          fi
           git remote add hf https://ykjaat6104:$HF_TOKEN@huggingface.co/spaces/ykjaat6104/AI-Legal-Policy-and-Document-Analyzer
           git push --force hf HEAD:refs/heads/main
