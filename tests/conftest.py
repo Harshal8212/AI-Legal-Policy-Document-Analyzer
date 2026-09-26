@@ -24,7 +24,6 @@ from main import app  # noqa: E402
 def mock_env(monkeypatch):
     """Inject a fake HuggingFace token so Config.validate_api_key() passes."""
     monkeypatch.setenv("HUGGINGFACEHUB_API_TOKEN", "hf_FAKE_TOKEN_FOR_CI_TESTING_1234567890")
-    monkeypatch.setenv("GOOGLE_API_KEY", "fake-google-api-key-for-ci")
 
 
 @pytest_asyncio.fixture
