@@ -33,4 +33,11 @@ jobs:
             exit 0
           fi
           git remote add hf https://Harshal8212:$HF_TOKEN@huggingface.co/spaces/Harshal8212/AI-Legal-Policy-and-Document-Analyzer
-          git push --force hf HEAD:refs/heads/main
+          
+          # Create a clean branch with no history to avoid pushing past binary files to HF
+          git checkout --orphan hf-deploy
+          # Remove the PDF from the deployment (since HF blocks large binaries)
+          git rm --cached "*.pdf" 2>/dev/null || true
+          
+          git commit -m "Automated deployment to Hugging Face"
+          git push --force hf hf-deploy:refs/heads/main
